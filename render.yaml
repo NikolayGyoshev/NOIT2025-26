@@ -1,0 +1,34 @@
+databases:
+  - name: noshuvki-db
+    databaseName: noshuvki
+    user: noshuvki
+    plan: free # or 'starter' for paid tier
+
+services:
+  - type: web
+    name: noshuvki-app
+    runtime: node
+    plan: free # or 'starter' for paid tier
+    buildCommand: npm install && npm run build && npm run db:push
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: noshuvki-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
+      # Add email configuration if needed
+      # - key: EMAIL_HOST
+      #   value: smtp.your-provider.com
+      # - key: EMAIL_PORT
+      #   value: 587
+      # - key: EMAIL_USER
+      #   sync: false # mark as secret
+      # - key: EMAIL_PASS
+      #   sync: false # mark as secret
