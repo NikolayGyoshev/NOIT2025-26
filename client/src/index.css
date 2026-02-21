@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Elegant Blue & Cream Palette */
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --background: 210 20% 98%;      /* Soft off-white */
+  --foreground: 215 28% 17%;      /* Deep charcoal blue */
+
+  --card: 0 0% 100%;
+  --card-foreground: 215 28% 17%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 28% 17%;
+
+  --primary: 216 33% 28%;         /* Classic Navy */
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 35 30% 90%;        /* Soft Cream/Sand */
+  --secondary-foreground: 216 33% 28%;
+
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 16% 47%;
+
+  --accent: 35 45% 65%;           /* Gold/Sand Accent */
+  --accent-foreground: 216 33% 28%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
+  --ring: 216 33% 28%;
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold text-primary tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Day Picker Customization */
+.rdp-day_selected {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+.rdp-day_selected:hover {
+  background-color: hsl(var(--primary)) !important;
+  opacity: 0.9;
+}
