@@ -1,124 +1,123 @@
-# Quick Start Guide
+# Quick Start (Local Development)
 
-## Prerequisites
-- Node.js 20+ installed
-- npm or yarn package manager
+## 1) Prerequisites
+- Node.js 20+
+- npm
 
-## Installation
+## 2) Install dependencies
 
-```bash
-cd Backend-Builder
+```powershell
+cd NOIT2025-26-main
 npm install
 ```
 
-## Running in Development
+## 3) Create local environment file
 
-### Option 1: Using npm script (easiest)
-```bash
-# Set environment first in your terminal/shell
-# On Windows PowerShell:
-$env:NODE_ENV = 'development'
-$env:DATABASE_URL = 'postgres://localhost:5432/test'
-$env:SESSION_SECRET = 'dev_secret'
+Create `.env` in the project root with values like this:
 
-# Run the dev server
+```env
+NODE_ENV=development
+SESSION_SECRET=dev_secret
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=Admin12345
+ADMIN_FIRST_NAME=Admin
+ADMIN_LAST_NAME=User
+```
+
+> `DATABASE_URL` is optional for local start. Without it, the app uses in-memory storage.
+
+## 4) Run in development
+
+```powershell
 npm run dev
 ```
 
-### Option 2: Direct tsx
-```bash
-npx tsx server/index.ts
+Default URL:
+- http://localhost:5000
+
+If port 5000 is busy:
+
+```powershell
+$env:PORT='5055'
+npm run dev
 ```
 
-The server will start on `http://localhost:5000`
+## 5) Login accounts
 
-## Features Available in Development
+### Administrator
+- Email: `admin@example.com`
+- Password: `Admin12345`
 
-✅ **Client-side**:
-- React application fully functional
-- All UI components working
-- Navigation and routing working
-- Room browsing and filtering
+### Registered user
+- Email: `nikolaygyoshev3@gmail.com`
+- Password: `NOIT2025/2026`
 
-✅ **Server-side**:
-- Express API endpoints available
-- Development authentication (mock users)
-- Vite hot module reloading for client
+## 6) Useful routes
+- Home: `/`
+- Login: `/login`
+- Admin panel: `/admin`
 
-❌ **Requires Database** (PostgreSQL):
-- Data persistence
-- Room management
-- Reservations
-- Reviews
+## 7) Optional commands
 
-## Production Build
+Type check:
 
-```bash
+```powershell
+npm run check
+```
+
+Production build:
+
+```powershell
 npm run build
 npm start
 ```
 
-The build creates:
-- `dist/public/` - Static client files
-- `dist/index.cjs` - Bundled server
+## 8) Deploy to Fly.io (quick)
 
-## Environment Variables
+If you already have an existing Fly app, using the same app name keeps the same URL.
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| NODE_ENV | No | development | Environment mode |
-| DATABASE_URL | For DB features | - | PostgreSQL connection string |
-| SESSION_SECRET | No | - | Session encryption secret |
-| REPL_ID | For real auth | - | Replit OIDC integration ID |
-| PORT | No | 5000 | Server port |
+```powershell
+# Install Fly CLI if needed
+# https://fly.io/docs/hands-on/install-flyctl/
 
-## Type Checking
+# Login
+fly auth login
 
-Verify all TypeScript types are correct:
-```bash
-npm run check
+# In project root
+fly launch --no-deploy
+
+# Set required secrets
+fly secrets set SESSION_SECRET=your_secret
+fly secrets set ADMIN_EMAIL=admin@example.com
+fly secrets set ADMIN_PASSWORD=Admin12345
+
+# Optional (if using PostgreSQL)
+fly secrets set DATABASE_URL=postgres://...
+
+# Deploy
+fly deploy
 ```
 
-## Architecture
+Useful checks:
 
-```
-Backend-Builder/
-├── client/          # React frontend
-│   └── src/
-│       ├── pages/   # Page components
-│       ├── components/ # Reusable UI components
-│       └── hooks/   # Custom React hooks
-├── server/          # Express backend
-│   ├── index.ts     # Server entry point
-│   ├── routes.ts    # API routes
-│   └── replit_integrations/auth/ # Authentication
-└── shared/          # Shared types and schemas
-    ├── schema.ts    # Database schemas
-    └── routes.ts    # API definitions
+```powershell
+fly status
+fly logs
 ```
 
 ## Troubleshooting
 
-### Port already in use
-```bash
-# Change the port
-$env:PORT = 3000
+### `EADDRINUSE` (port already in use)
+Run with a different port:
+
+```powershell
+$env:PORT='5055'
 npm run dev
 ```
 
-### Database connection errors (optional)
-These are normal in development - the app still runs without a database
+### Admin panel not visible
+- Log in with the same email as `ADMIN_EMAIL` from `.env`.
+- Restart server after changing `.env`.
 
-### TypeScript errors
-```bash
-npm run check
-```
-to see all type errors and fix them
-
-## Next Steps
-
-1. Start the development server
-2. Open http://localhost:5000 in your browser
-3. Browse the rooms (mock data will load when database is available)
-4. Explore the admin panel at /admin
-5. Check the API endpoints in `server/routes.ts`
+### No data persistence
+If `DATABASE_URL` is not set, data is stored in memory and resets on restart.
