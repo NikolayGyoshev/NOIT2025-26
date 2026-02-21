@@ -315,7 +315,7 @@ export default function Admin() {
                       <td className="px-6 py-4 max-w-md">
                         <div className="line-clamp-2">{msg.message}</div>
                         <div className="text-xs text-muted-foreground mt-1">
-                          {new Date(msg.createdAt).toLocaleString()}
+                          {msg.createdAt ? new Date(msg.createdAt).toLocaleString() : "-"}
                         </div>
                       </td>
                       <td className="px-6 py-4">

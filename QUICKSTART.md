@@ -22,6 +22,8 @@ ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=Admin12345
 ADMIN_FIRST_NAME=Admin
 ADMIN_LAST_NAME=User
+DEMO_EMAIL=nikolaygyoshev3@gmail.com
+DEMO_PASSWORD=NOIT2025/2026
 ```
 
 > `DATABASE_URL` is optional for local start. Without it, the app uses in-memory storage.
@@ -51,6 +53,8 @@ npm run dev
 ### Registered user
 - Email: `nikolaygyoshev3@gmail.com`
 - Password: `NOIT2025/2026`
+
+In `development`, this demo user is auto-created on server start (can be overridden with `DEMO_EMAIL`/`DEMO_PASSWORD`).
 
 ## 6) Useful routes
 - Home: `/`

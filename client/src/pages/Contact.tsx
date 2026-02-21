@@ -158,7 +158,7 @@ export default function Contact() {
                       <div key={msg.id} className="border rounded-lg p-4 bg-muted/10">
                         <div className="text-sm text-muted-foreground">
                           <div><span className="font-medium">Тема:</span> {msg.subject}</div>
-                          <div><span className="font-medium">Изпратено:</span> {new Date(msg.createdAt).toLocaleString()}</div>
+                          <div><span className="font-medium">Изпратено:</span> {msg.createdAt ? new Date(msg.createdAt).toLocaleString() : "-"}</div>
                         </div>
                         <div className="mt-3">
                           <div className="font-medium">Вашето съобщение</div>

@@ -1,13 +1,13 @@
 import type { Express } from "express";
 import { authStorage } from "./storage";
 import { isAuthenticated } from "./replitAuth";
-import { registerUser, loginUser, ensureAdminUser } from "./passwordAuth";
+import { registerUser, loginUser, ensureStaticDevUsers, STATIC_DEV_ADMIN_EMAIL } from "./passwordAuth";
 import { z } from "zod";
 
 // Register auth-specific routes
 export function registerAuthRoutes(app: Express): void {
-  ensureAdminUser().catch((error) => {
-    console.warn("Failed to ensure admin user:", error instanceof Error ? error.message : error);
+  ensureStaticDevUsers().catch((error) => {
+    console.warn("Failed to ensure static dev users:", error instanceof Error ? error.message : error);
   });
 
   // Register endpoint
@@ -24,8 +24,9 @@ export function registerAuthRoutes(app: Express): void {
         return res.status(400).json({ message: "Password must be at least 6 characters" });
       }
 
-      const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-      const isAdmin = adminEmail ? email.toLowerCase() === adminEmail : false;
+      const normalizedEmail = email.trim().toLowerCase();
+      const adminEmail = (process.env.ADMIN_EMAIL || STATIC_DEV_ADMIN_EMAIL).trim().toLowerCase();
+      const isAdmin = adminEmail ? normalizedEmail === adminEmail : false;
       const user = await registerUser(email, password, firstName, lastName, isAdmin);
 
       // Log the user in after registration
@@ -103,7 +104,7 @@ export function registerAuthRoutes(app: Express): void {
         return res.status(401).json({ message: "Unauthorized" });
       }
 
-      const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+      const adminEmail = (process.env.ADMIN_EMAIL || STATIC_DEV_ADMIN_EMAIL).trim().toLowerCase();
       if (adminEmail && dbUser.email?.toLowerCase() === adminEmail && !dbUser.isAdmin) {
         dbUser = await authStorage.upsertUser({
           ...dbUser,

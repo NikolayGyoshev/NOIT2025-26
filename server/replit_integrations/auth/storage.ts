@@ -1,5 +1,5 @@
 import { users, type User, type UpsertUser } from "@shared/models/auth";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 // If a DATABASE_URL isn't provided, use an in-memory fallback so the
 // server can run in development without a database.
@@ -14,9 +14,11 @@ class InMemoryAuthStorage {
     let user = userMap.get(id);
     if (user) return user;
 
+    const normalizedId = id.trim().toLowerCase();
+
     // Try email lookup
     for (const u of userMap.values()) {
-      if (u.email === id) return u;
+      if (u.email === id || (u.email?.toLowerCase() === normalizedId)) return u;
     }
     return undefined;
   }
@@ -68,6 +70,14 @@ if (!process.env.DATABASE_URL) {
           .select()
           .from(usersTable)
           .where(eq(usersTable.email, id))
+          .then((rows: any[]) => rows[0]);
+        if (user) return user;
+
+        // Case-insensitive email lookup fallback (for legacy mixed-case emails)
+        user = await (db as any)
+          .select()
+          .from(usersTable)
+          .where(sql`lower(${usersTable.email}) = lower(${id})`)
           .then((rows: any[]) => rows[0]);
         return user;
       }

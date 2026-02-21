@@ -2,6 +2,8 @@ import { users, rooms, reservations, reviews, contactMessages, type User, type U
 import { eq, and, gte, lte, desc, lt, gt, ne } from "drizzle-orm";
 import { authStorage } from "./replit_integrations/auth/storage";
 
+let db: any;
+
 export interface IStorage {
   // Auth
   getUser(id: string): Promise<User | undefined>;
@@ -107,7 +109,7 @@ export class DatabaseStorage implements IStorage {
     }
     
     const rows = await query.orderBy(desc(reservations.startDate));
-    return rows.map(r => ({ ...r.reservation, room: r.room }));
+    return rows.map((r: { reservation: Reservation; room: Room }) => ({ ...r.reservation, room: r.room }));
   }
 
   async getReservation(id: number): Promise<Reservation | undefined> {
@@ -152,7 +154,7 @@ export class DatabaseStorage implements IStorage {
     .where(eq(reviews.roomId, roomId))
     .orderBy(desc(reviews.createdAt));
 
-    return rows.map(r => ({
+    return rows.map((r: { review: Review; user: User }) => ({
       ...r.review,
       user: { username: r.user.firstName || r.user.email || "Anonymous" } // Map to display name
     }));
@@ -318,7 +320,8 @@ let storageImpl: IStorage;
 if (process.env.DATABASE_URL) {
   try {
     // Lazy import to avoid importing ./db at module load time when no DB exists
-    const { db } = await import("./db");
+    const dbModule = await import("./db");
+    db = dbModule.db;
     // Test connection early so we can fall back if the DB is unreachable
     await db.select().from(rooms).limit(1);
     (global as any).db = db; // keep for debugging
