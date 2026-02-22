@@ -1,124 +1,97 @@
-# Quick Start Guide
+# NOIT2025-26: Локално пускане (стъпка по стъпка)
 
-## Prerequisites
-- Node.js 20+ installed
-- npm or yarn package manager
+Това ръководство е за Windows PowerShell.
 
-## Installation
+## 1) Изисквания
 
-```bash
-cd Backend-Builder
+- Node.js 20+ (препоръчително LTS)
+- npm (идва с Node.js)
+
+Провери версиите:
+
+```powershell
+node -v
+npm -v
+```
+
+## 2) Влез в правилната папка на проекта
+
+В твоя случай проектът е във вложена папка. Ако си в:
+
+`C:\Users\nikol\Downloads\NOIT2025-26-main`
+
+изпълни:
+
+```powershell
+Set-Location .\NOIT2025-26-main
+```
+
+След това трябва да виждаш `package.json` в текущата папка.
+
+## 3) Инсталирай зависимостите
+
+```powershell
 npm install
 ```
 
-## Running in Development
+## 4) Задай environment променливи за development
 
-### Option 1: Using npm script (easiest)
-```bash
-# Set environment first in your terminal/shell
-# On Windows PowerShell:
+```powershell
 $env:NODE_ENV = 'development'
-$env:DATABASE_URL = 'postgres://localhost:5432/test'
 $env:SESSION_SECRET = 'dev_secret'
+```
 
-# Run the dev server
+По желание (ако имаш PostgreSQL локално):
+
+```powershell
+$env:DATABASE_URL = 'postgres://localhost:5432/test'
+```
+
+## 5) Стартирай проекта
+
+```powershell
 npm run dev
 ```
 
-### Option 2: Direct tsx
-```bash
-npx tsx server/index.ts
+Приложението се стартира на:
+
+`http://localhost:5000`
+
+## 6) Полезни команди
+
+Проверка на TypeScript:
+
+```powershell
+npm run check
 ```
 
-The server will start on `http://localhost:5000`
+Production build:
 
-## Features Available in Development
-
-✅ **Client-side**:
-- React application fully functional
-- All UI components working
-- Navigation and routing working
-- Room browsing and filtering
-
-✅ **Server-side**:
-- Express API endpoints available
-- Development authentication (mock users)
-- Vite hot module reloading for client
-
-❌ **Requires Database** (PostgreSQL):
-- Data persistence
-- Room management
-- Reservations
-- Reviews
-
-## Production Build
-
-```bash
+```powershell
 npm run build
 npm start
 ```
 
-The build creates:
-- `dist/public/` - Static client files
-- `dist/index.cjs` - Bundled server
+## 7) Често срещани проблеми
 
-## Environment Variables
+### Грешка: `Could not read package.json`
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| NODE_ENV | No | development | Environment mode |
-| DATABASE_URL | For DB features | - | PostgreSQL connection string |
-| SESSION_SECRET | No | - | Session encryption secret |
-| REPL_ID | For real auth | - | Replit OIDC integration ID |
-| PORT | No | 5000 | Server port |
+Причина: не си в правилната папка.
 
-## Type Checking
+Решение:
 
-Verify all TypeScript types are correct:
-```bash
-npm run check
+```powershell
+Set-Location C:\Users\nikol\Downloads\NOIT2025-26-main\NOIT2025-26-main
+npm run dev
 ```
 
-## Architecture
+### Портът е зает
 
-```
-Backend-Builder/
-├── client/          # React frontend
-│   └── src/
-│       ├── pages/   # Page components
-│       ├── components/ # Reusable UI components
-│       └── hooks/   # Custom React hooks
-├── server/          # Express backend
-│   ├── index.ts     # Server entry point
-│   ├── routes.ts    # API routes
-│   └── replit_integrations/auth/ # Authentication
-└── shared/          # Shared types and schemas
-    ├── schema.ts    # Database schemas
-    └── routes.ts    # API definitions
-```
-
-## Troubleshooting
-
-### Port already in use
-```bash
-# Change the port
+```powershell
 $env:PORT = 3000
 npm run dev
 ```
 
-### Database connection errors (optional)
-These are normal in development - the app still runs without a database
+### Грешки за база данни
 
-### TypeScript errors
-```bash
-npm run check
-```
-to see all type errors and fix them
-
-## Next Steps
-
-1. Start the development server
-2. Open http://localhost:5000 in your browser
-3. Browse the rooms (mock data will load when database is available)
-4. Explore the admin panel at /admin
-5. Check the API endpoints in `server/routes.ts`
+Ако нямаш PostgreSQL, част от функционалностите, зависещи от база, може да не работят. Frontend и основните dev функции обикновено стартират нормално.
