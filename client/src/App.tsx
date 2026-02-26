@@ -41,24 +41,24 @@ function Router() {
       <footer className="bg-primary text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-display text-2xl font-bold mb-4 text-white">ÐÐ¾Ñ‰ÑƒÐ²ÐºÐ¸<span className="text-accent">+</span></h3>
+            <h3 className="font-display text-2xl font-bold mb-4 text-white">Нощувки<span className="text-accent">+</span></h3>
             <p className="text-white">
-              Ð’Ð°ÑˆÐ¸ÑÑ‚ Ð½Ð°Ð´ÐµÐ¶Ð´ÐµÐ½ Ð¿Ð°Ñ€Ñ‚Ð½ÑŒÐ¾Ñ€ Ð·Ð° Ð»ÑƒÐºÑÐ¾Ð·Ð½Ð¸ Ð½Ð¾Ñ‰ÑƒÐ²ÐºÐ¸ Ð¸ Ð½ÐµÐ·Ð°Ð±Ñ€Ð°Ð²Ð¸Ð¼Ð¸ Ð¿Ñ€ÐµÐ¶Ð¸Ð²ÑÐ²Ð°Ð½Ð¸Ñ.
+              Вашият надежден партньор за луксозни нощувки и незабравими преживявания.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">Ð‘ÑŠÑ€Ð·Ð¸ Ð²Ñ€ÑŠÐ·ÐºÐ¸</h4>
+            <h4 className="font-bold text-lg mb-4">Бързи връзки</h4>
             <ul className="space-y-2 text-white/70">
-              <li><a href="/rooms" className="hover:text-accent">Ð¡Ñ‚Ð°Ð¸</a></li>
-              <li><a href="/contact" className="hover:text-accent">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</a></li>
+              <li><a href="/rooms" className="hover:text-accent">Стаи</a></li>
+              <li><a href="/contact" className="hover:text-accent">Контакти</a></li>
               {/** Show admin link only for admins */}
-              {user?.isAdmin && <li><a href="/admin" className="hover:text-accent">ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ</a></li>}
+              {user?.isAdmin && <li><a href="/admin" className="hover:text-accent">Администрация</a></li>}
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</h4>
+            <h4 className="font-bold text-lg mb-4">Контакти</h4>
             <p className="text-white/70">
-              ÐŸÐ°Ð·Ð°Ñ€Ð´Ð¶Ð¸Ðº, Ð‘ÑŠÐ»Ð³Ð°Ñ€Ð¸Ñ<br/>
+              Пазарджик, България<br/>
               noshtuvkiplus@gmail.com<br/>
               +359 895 759 357
             </p>
