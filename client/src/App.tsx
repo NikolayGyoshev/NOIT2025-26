@@ -47,16 +47,16 @@ function Router() {
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">Бързи връзки</h4>
+            <h4 className="font-bold text-lg mb-4">{"\u0411\u044a\u0440\u0437\u0438 \u0432\u0440\u044a\u0437\u043a\u0438"}</h4>
             <ul className="space-y-2 text-white/70">
               <li><a href="/rooms" className="hover:text-accent">Стаи</a></li>
-              <li><a href="/contact" className="hover:text-accent">Контакти</a></li>
+              <li><a href="/contact" className="hover:text-accent">{"\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u0438"}</a></li>
               {/** Show admin link only for admins */}
               {user?.isAdmin && <li><a href="/admin" className="hover:text-accent">Администрация</a></li>}
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">Контакти</h4>
+            <h4 className="font-bold text-lg mb-4">{"\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u0438"}</h4>
             <p className="text-white/70">
               Пазарджик, България<br/>
               noshtuvkiplus@gmail.com<br/>
