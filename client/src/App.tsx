@@ -65,7 +65,7 @@ function Router() {
           </div>
         </div>
         <div className="text-center text-white/40 mt-12 pt-8 border-t border-white/10">
-          Â© 2025 ÐÐ¾Ñ‰ÑƒÐ²ÐºÐ¸+
+          НОИТ 2025/2026 Нощувки+
         </div>
       </footer>
     </div>
