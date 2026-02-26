@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+﻿import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -41,31 +41,31 @@ function Router() {
       <footer className="bg-primary text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-display text-2xl font-bold mb-4 text-white">Нощувки<span className="text-accent">+</span></h3>
+            <h3 className="font-display text-2xl font-bold mb-4 text-white">ÐÐ¾Ñ‰ÑƒÐ²ÐºÐ¸<span className="text-accent">+</span></h3>
             <p className="text-white">
-              Вашият надежден партньор за луксозни нощувки и незабравими преживявания.
+              Ð’Ð°ÑˆÐ¸ÑÑ‚ Ð½Ð°Ð´ÐµÐ¶Ð´ÐµÐ½ Ð¿Ð°Ñ€Ñ‚Ð½ÑŒÐ¾Ñ€ Ð·Ð° Ð»ÑƒÐºÑÐ¾Ð·Ð½Ð¸ Ð½Ð¾Ñ‰ÑƒÐ²ÐºÐ¸ Ð¸ Ð½ÐµÐ·Ð°Ð±Ñ€Ð°Ð²Ð¸Ð¼Ð¸ Ð¿Ñ€ÐµÐ¶Ð¸Ð²ÑÐ²Ð°Ð½Ð¸Ñ.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">Бързи връзки</h4>
+            <h4 className="font-bold text-lg mb-4">Ð‘ÑŠÑ€Ð·Ð¸ Ð²Ñ€ÑŠÐ·ÐºÐ¸</h4>
             <ul className="space-y-2 text-white/70">
-              <li><a href="/rooms" className="hover:text-accent">Стаи</a></li>
-              <li><a href="/contact" className="hover:text-accent">Контакти</a></li>
+              <li><a href="/rooms" className="hover:text-accent">Ð¡Ñ‚Ð°Ð¸</a></li>
+              <li><a href="/contact" className="hover:text-accent">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</a></li>
               {/** Show admin link only for admins */}
-              {user?.isAdmin && <li><a href="/admin" className="hover:text-accent">Администрация</a></li>}
+              {user?.isAdmin && <li><a href="/admin" className="hover:text-accent">ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ</a></li>}
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-lg mb-4">Контакти</h4>
+            <h4 className="font-bold text-lg mb-4">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</h4>
             <p className="text-white/70">
-              Пазарджик, България<br/>
+              ÐŸÐ°Ð·Ð°Ñ€Ð´Ð¶Ð¸Ðº, Ð‘ÑŠÐ»Ð³Ð°Ñ€Ð¸Ñ<br/>
               noshtuvkiplus@gmail.com<br/>
               +359 895 759 357
             </p>
           </div>
         </div>
         <div className="text-center text-white/40 mt-12 pt-8 border-t border-white/10">
-          © 2025 Нощувки+
+          Â© 2025 ÐÐ¾Ñ‰ÑƒÐ²ÐºÐ¸+
         </div>
       </footer>
     </div>
@@ -84,3 +84,4 @@ function App() {
 }
 
 export default App;
+
